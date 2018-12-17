@@ -35,8 +35,6 @@ public class PyToJsonProcessor implements Processor
 	 * https://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/Exchange.html
 	 * https://camel.apache.org/maven/current/camel-core/apidocs/org/apache/camel/Message.html
 	 */
-
-	@Override
 	public void process(Exchange exchange) throws Exception
 	{
 		Message toProcess = exchange.getIn().copy();

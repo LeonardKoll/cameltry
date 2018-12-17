@@ -13,17 +13,17 @@ public class MyRouteBuilder extends RouteBuilder
     
     public void configure()
     {
-    	final String transferFolder = "C:/Users/temp/OneDrive/Projekte/Studium/Master/Komponententechnologien/Sudoku/Generator0/transfer";
-    	Processor py_to_json = new PyToJsonProcessor();
+    	final String transferFolder = "C:/Users/leona/Desktop/cameltry";
+    	//Processor py_to_json = new PyToJsonProcessor();
     	
-      //from("file:" + transferFolder + "/input" + "?noop=false") 	// noop=false löscht die Files nach der Verarbeitung / verschiebt sie nach .camel
+        from("file:" + transferFolder + "/input" + "?noop=false") 	// noop=false löscht die Files nach der Verarbeitung / verschiebt sie nach .camel
         
-    	from("zeromq:tcp://127.0.0.1:5555?socketType=PULL")		 	
+    	//from("zeromq:tcp://127.0.0.1:5555?socketType=PULL")
     		.convertBodyTo(String.class) 							// Der Body an sicht ist zunächst vom Typ GenericFile, repräsentiert also noch den urspr File Endpoint.
-    		.log("Input: ${body}")	
-    		.process(py_to_json)									// Konvertieurng, siehe Klasse PyToJsonProcessor
-	    	.log("Sent:  ${body}")											// Print auf die Konsole
-	    	.to("rabbitmq://136.199.51.111/inExchange?username=kompo&password=kompo&skipQueueDeclare=true");
+    		//.log("Input: ${body}")
+    		//.process(py_to_json)									// Konvertieurng, siehe Klasse PyToJsonProcessor
+	    	//.log("Sending:  ${body}")											// Print auf die Konsole
+	    	.to("activemq:wonderfulQ");
 
 	    	//.to("file:" + transferFolder + "/output");				// Neue Datei in den Output-Folder
     	
